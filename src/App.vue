@@ -8,6 +8,20 @@
     </div>
 </template>
 
+<script lang="ts">
+import { Component, Vue, Watch } from 'vue-property-decorator'
+import { Route } from 'vue-router'
+
+@Component
+export default class About extends Vue {
+    // watch
+    @Watch('$route')
+    routeChange(val: Route, oldVal: Route) {
+        console.log('route val', val.name, 'oldVal', oldVal.name)
+    }
+}
+</script>
+
 <style lang="less">
 #app {
     font-family: 'Avenir', Helvetica, Arial, sans-serif;

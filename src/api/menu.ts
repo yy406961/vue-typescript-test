@@ -13,3 +13,14 @@ export const getMenuList = (id: number) => {
         }
     })
 }
+
+/**
+ * 测试post
+ * 
+ */
+export const getData = () => {
+    return request({
+        url: '/getData',
+        method: 'post'
+    })
+}
