@@ -18,6 +18,8 @@ export default class baiduMap extends Vue {
 
     mounted() {
         this.creatMap()
+        this.creatMarker()
+        this.creatLine()
     }
 
     creatMap() {
@@ -34,6 +36,23 @@ export default class baiduMap extends Vue {
         this.map.addControl(topRightNavigation)
         // 允许地图进行滚轮缩放
         this.map.enableScrollWheelZoom()
+    }
+
+    creatMarker() {
+        let marker = new BMap.Marker(new BMap.Point(112.978, 28.195)) // 创建点
+        this.map.addOverlay(marker) // 增加点
+    }
+
+    creatLine() {
+        let polyline = new BMap.Polyline(
+            [
+                new BMap.Point(112.978, 28.195),
+                new BMap.Point(113.108, 28.195),
+                new BMap.Point(112.978, 28.295)
+            ],
+            { strokeColor: 'blue', strokeWeight: 2, strokeOpacity: 0.5 }
+        ) // 创建折线
+        this.map.addOverlay(polyline) // 增加折线
     }
 }
 </script>

@@ -3,7 +3,8 @@
         <!-- <img alt="Vue logo" src="../assets/logo.png" /> -->
         <HelloWorld msg="Welcome to Your Vue.js + TypeScript App" />
         <hr />
-        <vueChart ref="line" :options="chartStyle"></vueChart>
+        <button @click="changeStyle">改变图表大小</button>
+        <vueChart ref="line" :options="lineChartStyle"></vueChart>
         <vueChart ref="pie" :options="chartStyle"></vueChart>
         <vueChart ref="map" :options="chartStyle"></vueChart>
     </div>
@@ -23,9 +24,13 @@ import { getMenuList, getData } from '@/api/menu.ts'
     components: { HelloWorld, vueChart }
 })
 export default class Home extends Vue {
+    lineChartStyle: Object = {
+        width: '100%',
+        height: '300'
+    }
     chartStyle: Object = {
-        width: '600px',
-        height: '400px'
+        width: '700',
+        height: '400'
     }
 
     mounted() {
@@ -36,9 +41,9 @@ export default class Home extends Vue {
     }
 
     init() {
-        let lineEl: any = this.$refs.line
+        // let lineEl: any = this.$refs.line
         let lineOption = getLineOption()
-        lineEl.build(lineOption)
+        this.$refs.line.build(lineOption)
 
         let pieEl: any = this.$refs.pie
         let pieOption = getPieOption()
@@ -47,6 +52,15 @@ export default class Home extends Vue {
         let mapEl: any = this.$refs.map
         let mapOption = getMapOption()
         mapEl.build(mapOption)
+    }
+
+    changeStyle() {
+        let sizeObj = {
+            width: '500',
+            height: '300'
+        }
+        let lineEl: any = this.$refs.line
+        lineEl.resizeComp(sizeObj)
     }
 }
 </script>

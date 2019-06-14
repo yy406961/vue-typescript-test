@@ -18,5 +18,6 @@ declare module "vue/types/vue" {
       $urls: any;
       $Message: any;
       $Modal: any;
+      $nextTick: any
     }
   }

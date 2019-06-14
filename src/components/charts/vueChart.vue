@@ -1,5 +1,6 @@
 <template>
-    <div class="vueEcharts" ref="chart"></div>
+    <!-- <div class="vueEcharts" ref="chart"></div> -->
+    <div :style="chartStyle" ref="chart"></div>
 </template>
 
 <script lang="ts">
@@ -10,11 +11,16 @@ import 'echarts/map/js/china'
 
 @Component
 export default class vueEcharts extends Vue {
-    @Prop() private options?: Object
-    private width: Number = 600
-    private height: Number = 300
+    @Prop() private options?: any
+    private width: string = '600'
+    private height: string = '300'
+    private EC: echarts.ECharts | undefined
 
-    EC: echarts.ECharts | undefined
+    created() {
+        this.width = this.options.width
+        this.height = this.options.height
+    }
+
     mounted() {
         this.EC = echarts.init(this.$refs.chart as HTMLCanvasElement)
     }
@@ -29,9 +35,13 @@ export default class vueEcharts extends Vue {
             }
         }
     }
-    resize() {
-        if (this.EC) {
-            this.EC.resize()
+    resizeComp(newVal: any) {
+        if (newVal) {
+            this.width = newVal.width
+            this.height = newVal.height
+            this.$nextTick(() => {
+                this.EC.resize()
+            })
         }
     }
     dispose() {
@@ -46,17 +56,18 @@ export default class vueEcharts extends Vue {
     }
 
     get chartStyle() {
-        // let width =
-        //     this.width.toString().substr(this.width.length - 1) === '%' ?
-        //         this.width :
-        this.width + 'px'
-        // let height =
-        //     this.height.toString().substr(this.height.length - 1) === '%' ?
-        //         this.height :
-        this.height + 'px'
+        console.log('aaaaaaaaaa, this.width', this.width)
+        let width =
+            this.width.substr(this.width.length - 1) === '%'
+                ? this.width
+                : this.width + 'px'
+        let height =
+            this.height.substr(this.height.length - 1) === '%'
+                ? this.height
+                : this.height + 'px'
         return {
-            width: this.width,
-            height: this.height
+            width,
+            height
         }
     }
 }
