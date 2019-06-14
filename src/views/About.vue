@@ -22,6 +22,7 @@ import { getData } from '@/api/menu.ts'
 import CompTest from './compTest.vue'
 import { State, Getter, Action } from 'vuex-class'
 import { Route } from 'vue-router'
+import { storage } from '@/common/storage'
 
 // @Component 修饰符注明了此类为一个 Vue 组件
 @Component({
@@ -58,6 +59,7 @@ export default class About extends Vue {
     changeUserName(name: string) {
         this.SET_USERNAME(name)
         console.log('修改后的userName', this.userName)
+        storage.session.set('userName', name)
     }
     text(val: any) {
         this.newTxt = val

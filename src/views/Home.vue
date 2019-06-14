@@ -41,9 +41,9 @@ export default class Home extends Vue {
     }
 
     init() {
-        // let lineEl: any = this.$refs.line
+        let lineEl: any = this.$refs.line
         let lineOption = getLineOption()
-        this.$refs.line.build(lineOption)
+        lineEl.build(lineOption)
 
         let pieEl: any = this.$refs.pie
         let pieOption = getPieOption()
