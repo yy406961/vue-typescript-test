@@ -1,6 +1,6 @@
 <template>
     <div class="form">
-        <p>测试下</p>
+        <p>测试下a</p>
         <FormDemo
             :option="formOpt"
             ref="form"
