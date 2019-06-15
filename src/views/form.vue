@@ -1,6 +1,6 @@
 <template>
     <div class="form">
-        <p>测试下 commitizen再来</p>
+        <p>测试下 commitizen再来再来</p>
         <FormDemo
             :option="formOpt"
             ref="form"
