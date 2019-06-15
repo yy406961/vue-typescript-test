@@ -80,7 +80,8 @@ export default class Form extends Vue {
                                 } else {
                                     arr = [{ name: '苹果', value: '1' }]
                                 }
-                                me.$refs.form.setItemData('select222', arr)
+                                let ref: any = me.$refs.form
+                                ref.setItemData('select222', arr)
                             }
                         }
                     },
@@ -92,7 +93,7 @@ export default class Form extends Vue {
                             value: '2',
                             width: 200,
                             disabled: false,
-                            data: me.selectArr2,
+                            data: [],
                             change: function() {}
                         }
                     },
@@ -241,7 +242,8 @@ export default class Form extends Vue {
                             value: '查询1',
                             disabled: false,
                             click: function() {
-                                console.log(me.$refs.form.getValue())
+                                let ref = me.$refs.form as HTMLFormElement
+                                console.log(ref.getValue())
                             }
                         }
                     },
@@ -254,7 +256,8 @@ export default class Form extends Vue {
                             value: '查询2',
                             disabled: false,
                             click: function() {
-                                console.log(me.$refs.form.getValue())
+                                let ref: any = me.$refs.form
+                                console.log(ref.getValue())
                             }
                         }
                     }
@@ -268,8 +271,8 @@ export default class Form extends Vue {
                             value: '查询3',
                             disabled: false,
                             click: function() {
-                                let h = me.$refs.form.getContainerHeight()
-                                console.log(h)
+                                let h: any = me.$refs.form
+                                console.log(h.getContainerHeight())
                             }
                         }
                     },
@@ -281,7 +284,9 @@ export default class Form extends Vue {
                             value: '清空',
                             disabled: false,
                             click: function() {
-                                me.$refs.form.clearValue()
+                                // me.$refs.form.clearValue()
+                                let ref: any = me.$refs.form
+                                ref.clearValue()
                             }
                         }
                     }

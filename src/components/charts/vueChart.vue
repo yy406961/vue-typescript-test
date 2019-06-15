@@ -40,7 +40,8 @@ export default class vueEcharts extends Vue {
             this.width = newVal.width
             this.height = newVal.height
             this.$nextTick(() => {
-                this.EC.resize()
+                let EC: any = this.EC
+                EC.resize()
             })
         }
     }

@@ -27,8 +27,8 @@ export default class Vform extends Vue {
     @Prop() private option!: any
 
     // data
-    private wrapIndex = []
-    private btnIndex = []
+    private wrapIndex: any = []
+    private btnIndex: any = []
     private labelPos = ''
     private items = []
     private labelWidth = ''
@@ -57,7 +57,7 @@ export default class Vform extends Vue {
     // created
     created() {
         if (this.option.canSlider && this.option.items.length >= 3) {
-            this.option.items.map((item: any, index: number) => {
+            this.option.items.map((item: any, index: any) => {
                 if (item.wrap) {
                     this.wrapIndex.push(index)
                 }
@@ -85,8 +85,9 @@ export default class Vform extends Vue {
         me.formOpt.items.forEach((it: any, index: number) => {
             if (it.show === undefined || it.show) {
                 if (me.$refs['comp' + index]) {
-                    if (isFunction(me.$refs['comp' + index].getValue)) {
-                        assigns(returnData, me.$refs['comp' + index].getValue())
+                    let ref: any = me.$refs['comp' + index]
+                    if (isFunction(ref.getValue)) {
+                        assigns(returnData, ref.getValue())
                     }
                 }
             }
@@ -100,7 +101,8 @@ export default class Vform extends Vue {
             data.forEach((d: any) => {
                 if (it.comOpt.id === d.id) {
                     me.$nextTick(() => {
-                        me.$refs['comp' + index].setValue(d.value)
+                        let ref: any = me.$refs['comp' + index]
+                        ref.setValue(d.value)
                     })
                 }
             })
@@ -109,7 +111,7 @@ export default class Vform extends Vue {
     // 清空value
     clearValue() {
         this.formOpt.items.forEach((it: any, index: number) => {
-            let vm = this.$refs['comp' + index]
+            let vm: any = this.$refs['comp' + index]
             if (vm && isFunction(vm.setValue)) {
                 vm.setValue('')
             }
