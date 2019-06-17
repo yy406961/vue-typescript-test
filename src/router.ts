@@ -33,6 +33,12 @@ export default new Router({
             name: 'form',
             component: () =>
                 import(/* webpackChunkName: "baiduMap" */ './views/form.vue')
+        },
+        {
+            path: '/table',
+            name: 'table',
+            component: () =>
+                import(/* webpackChunkName: "baiduMap" */ './views/table.vue')
         }
     ]
 })

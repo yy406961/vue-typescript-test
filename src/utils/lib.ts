@@ -4,6 +4,7 @@
 import cloneDeep from 'lodash/cloneDeep'
 import assign from 'lodash/assign'
 import concat from 'lodash/concat'
+import max from 'lodash/max'
 
 export const isFunction = (obj: any) => {
     return typeof obj === 'function'
@@ -23,4 +24,8 @@ export const assigns = (arr1: any, arr2: any) => {
 
 export const concats = (arr1: any, arr2: any) => {
     return concat(arr1, arr2)
+}
+
+export const maxs = (obj: any) => {
+    return max(obj)
 }
