@@ -57,7 +57,6 @@ export default class vueEcharts extends Vue {
     }
 
     get chartStyle() {
-        console.log('aaaaaaaaaa, this.width', this.width)
         let width =
             this.width.substr(this.width.length - 1) === '%'
                 ? this.width

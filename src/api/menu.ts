@@ -24,3 +24,10 @@ export const getData = () => {
         method: 'post'
     })
 }
+// dashboard/relation 关系图
+export const getRelatioData = () => {
+    return request({
+        url: '/dashboard/relation',
+        method: 'post'
+    })
+}
