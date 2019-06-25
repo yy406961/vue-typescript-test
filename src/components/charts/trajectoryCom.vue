@@ -1,80 +1,32 @@
 <template>
     <div class="trajectoryCom">
-        <div>
-            <span class="trajectoryCom__index">排名</span>
-            <span class="trajectoryCom__back">路线</span>
-            <span class="trajectoryCom__count">热度</span>
+        <div class="trajectoryCom__header">
+            <p class="trajectoryCom__index">排名</p>
+            <p class="trajectoryCom__route">路线</p>
+            <p class="trajectoryCom__count">热度</p>
         </div>
-        <div v-for="item in renderData" class="trajectoryCom__container">
+        <div
+            v-for="(item, index) in renderData"
+            class="trajectoryCom__container"
+            :key="index"
+        >
             <div class="trajectoryCom__index" ref="barIndex"></div>
             <div class="trajectoryCom__back" ref="backBar">
-                <span v-text="item.source"></span>
-                ->
-                <span v-text="item.target"></span>
+                <span v-text="item.source" class="trajectoryCom__name"></span>
+                <i class="trajectoryCom__icon el-icon-right"></i>
+                <span v-text="item.target" class="trajectoryCom__name"></span>
             </div>
             <div class="trajectoryCom__count">{{ item.value }}</div>
         </div>
     </div>
 </template>
 
-<script>
-export default {
-    name: 'trajectoryCom',
-    data() {
-        return {
-            width: 100,
-            height: 100
-        }
-    },
-    updated() {
-        this.$nextTick(function() {
-            this.barStyle()
-        })
-    },
-    props: ['title', 'renderData'],
-    computed: {
-        baseWidth() {
-            if (this.renderData && this.renderData.length !== 0) {
-                return this.renderData[0].count
-            }
-            return 5
-        }
-    },
-    methods: {
-        barStyle() {
-            let bar = this.$refs.lightBar
-            let baseWidth = this.baseWidth
-            if (bar) {
-                bar.forEach(item => {
-                    let width = item.getAttribute('w')
-                    let per = (width / baseWidth) * 100
-                    item.style.width = `calc(${per}%)`
-                })
-            }
-            let index = this.$refs.barIndex
-            if (index) {
-                index.forEach(item => {
-                    let c = item.getAttribute('c')
-                    let color = 'rgba(162, 238, 255, 1)'
-                    switch (c) {
-                        case '0':
-                            color = 'rgba(255,80,80,1)'
-                            break
-                        case '1':
-                            color = 'rgba(255,157,107,1)'
-                            break
-                        case '2':
-                            color = 'rgba(218,210,106,1)'
-                            break
-                        default:
-                            color = 'rgba(162, 238, 255, 1)'
-                            break
-                    }
-                    item.style.color = color
-                })
-            }
-        }
-    }
+<script lang="ts">
+import { Component, Prop, Vue } from 'vue-property-decorator'
+
+@Component
+export default class trajectoryCom extends Vue {
+    @Prop() private renderData!: any
 }
 </script>
 
@@ -83,15 +35,19 @@ export default {
 .trajectoryCom {
     width: 100%;
     height: 100%;
-    padding-bottom: 10px;
+    padding-bottom: 5px;
     display: flex;
     flex-flow: column;
-    justify-content: space-around;
+    justify-content: space-between;
     color: $font-color;
     font-size: $sml-size;
     position: relative;
-    p {
-        margin-top: 2px;
+    &__header {
+        display: flex;
+        text-align: center;
+    }
+    &__route {
+        width: calc(100% - 75px);
     }
     &__numCount {
         position: absolute;
@@ -111,29 +67,21 @@ export default {
     }
     &__back {
         width: calc(100% - 75px);
-        border-radius: 4px;
-        // background-image: linear-gradient(
-        //     90deg,
-        //     $border-color 0%,
-        //     rgba(24, 105, 134, 0.2) 100%
-        // );
-        background: rgba(24, 105, 134, 0.2);
-    }
-    &__bar {
-        padding-left: 6px;
-        margin-right: 10px;
-        min-width: 5px;
-        height: 23px;
-        border-radius: 0 4px 4px 0;
         background-image: linear-gradient(
             90deg,
-            rgba(0, 118, 255, 1) 0%,
-            rgba(0, 196, 255, 1) 100%
+            rgba(0, 118, 255, 0.5) 0%,
+            rgba(0, 196, 255, 0.5) 100%
         );
-        transition: width 1s;
-        -moz-transition: width 1s; /* Firefox 4 */
-        -webkit-transition: width 1s; /* Safari and Chrome */
-        -o-transition: width 1s; /* Opera */
+        // background: rgba(24, 105, 134, 0.2);
+    }
+    &__name {
+        width: calc(50% - 10px);
+        display: inline-block;
+        text-align: center;
+    }
+    &__icon {
+        color: $main-color;
+        width: 20px;
     }
     &__count {
         padding: 0 6px;

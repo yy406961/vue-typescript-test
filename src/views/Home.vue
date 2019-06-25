@@ -5,19 +5,37 @@
         <hr />
         <button @click="changeStyle">改变图表大小</button>
         <hr />
-        <div class="div">
-            <relationChart
-                :option="relationOpt"
-                :renderData="relationData"
-            ></relationChart>
+        <div class="show">
+            <div class="div">
+                <relationChart
+                    :option="relationOpt"
+                    :renderData="relationData"
+                ></relationChart>
+            </div>
+            &nbsp;&nbsp;
+            <div class="div">
+                <barChart
+                    :option="relationOpt"
+                    :renderData="barChartData"
+                ></barChart>
+            </div>
+            &nbsp;&nbsp;
+            <div class="div">
+                <barCom
+                    ref="barChart"
+                    barType="省份排名"
+                    :renderData="barChartData"
+                ></barCom>
+            </div>
+            &nbsp;&nbsp;
+            <div class="div">
+                <TrajectoryCom
+                    ref="barChart"
+                    :renderData="trajectoryData"
+                ></TrajectoryCom>
+            </div>
         </div>
-        &nbsp;&nbsp;
-        <div class="div">
-            <barChart
-                :option="relationOpt"
-                :renderData="barChartData"
-            ></barChart>
-        </div>
+
         <hr />
         <vueChart ref="line" :options="lineChartStyle"></vueChart>
         <hr />
@@ -31,6 +49,8 @@
 import { Component, Vue } from 'vue-property-decorator'
 import HelloWorld from '@/components/HelloWorld.vue'
 import vueChart from '@/components/charts/vueChart.vue'
+import barCom from '@/components/charts/barCom.vue'
+import TrajectoryCom from '@/components/charts/trajectoryCom.vue'
 import relationChart from '@/components/charts/relationCharts.vue'
 import barChart from '@/components/charts/barCharts.vue'
 import {
@@ -40,7 +60,14 @@ import {
 } from '@/utils/setChartsOption.ts'
 import { getMenuList, getRelatioData } from '@/api/menu.ts'
 @Component({
-    components: { HelloWorld, vueChart, relationChart, barChart }
+    components: {
+        HelloWorld,
+        vueChart,
+        relationChart,
+        barChart,
+        barCom,
+        TrajectoryCom
+    }
 })
 export default class Home extends Vue {
     lineChartStyle: Object = {
@@ -57,6 +84,7 @@ export default class Home extends Vue {
     }
     relationData: any = []
     barChartData: any = []
+    trajectoryData: any = []
 
     mounted() {
         // getMenuList(1).then(resp => {
@@ -287,29 +315,16 @@ export default class Home extends Vue {
             { name: 'd', count: 4 },
             { name: 'e', count: 3 }
         ]
-        // let barData: any = [{ name: 'a', value: 8 }]
         this.barChartData = barData
 
-        //         let barData = [
-        //     { name: 'a', count: 8 },
-        //     { name: 'b', count: 6 },
-        //     { name: 'c', count: 5 },
-        //     { name: 'd', count: 4 },
-        //     { name: 'e', count: 3 }
-        // ]
-        // this.barChartData = barData
-
-        // let data = [
-        //     { source: '沙湖', target: '影视基地', value: 983 },
-        //     { source: '沙湖', target: '影视基地', value: 983 },
-        //     { source: '沙湖', target: '影视基地', value: 983 },
-        //     { source: '沙湖', target: '影视基地', value: 983 },
-        //     { source: '沙湖', target: '影视基地', value: 983 }
-        // ]
-        // this.trajectoryData = data
-
-        // let data = [{ source: '沙湖', target: '影视基地', value: 983 }]
-        // this.trajectoryData = data
+        let data1 = [
+            { source: '沙湖', target: '影视基地', value: 983 },
+            { source: '沙湖', target: '影视基地', value: 983 },
+            { source: '沙湖', target: '影视基地', value: 983 },
+            { source: '沙湖', target: '影视基地', value: 983 },
+            { source: '沙湖', target: '影视基地', value: 983 }
+        ]
+        this.trajectoryData = data1
     }
     changeStyle() {
         let sizeObj = {
@@ -321,3 +336,9 @@ export default class Home extends Vue {
     }
 }
 </script>
+
+<style>
+.show {
+    display: flex;
+}
+</style>

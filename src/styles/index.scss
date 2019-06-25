@@ -1,4 +1,12 @@
-body {
+$--font-path: '~element-ui/lib/theme-chalk/fonts';
+
+@import "~element-ui/packages/theme-chalk/src/index";
+@import './mixin.scss';
+@import './transition.scss';
+@import './variables.scss';
+@import './elementUI/index.scss';
+
+body, p, div {
     margin: 0;
     padding: 0;
     color: #fff;
@@ -31,9 +39,17 @@ div:focus {
         clear: both;
     }
 }
+
 .div {
     border: 1px solid rgba(0, 242, 184, 1);
-    display: inline-block;
+    // display: inline-block;
+    width: 236px;
+    height: 175px;
+}
+
+@font-face{
+    font-family: 'zzgf';
+    src : url('../assets/fonts/zzgf-lh.otf');
 }
 /** 滚动条样式 **/
 ::-webkit-scrollbar {
