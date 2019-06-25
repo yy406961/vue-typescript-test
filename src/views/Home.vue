@@ -4,13 +4,25 @@
         <HelloWorld msg="Welcome to Your Vue.js + TypeScript App" />
         <hr />
         <button @click="changeStyle">改变图表大小</button>
-        <relationChart
-            :option="relationOpt"
-            :renderData="relationData"
-        ></relationChart>
-        <barChart :option="relationOpt" :renderData="barChartData"></barChart>
+        <hr />
+        <div class="div">
+            <relationChart
+                :option="relationOpt"
+                :renderData="relationData"
+            ></relationChart>
+        </div>
+        &nbsp;&nbsp;
+        <div class="div">
+            <barChart
+                :option="relationOpt"
+                :renderData="barChartData"
+            ></barChart>
+        </div>
+        <hr />
         <vueChart ref="line" :options="lineChartStyle"></vueChart>
+        <hr />
         <vueChart ref="pie" :options="chartStyle"></vueChart>
+        <hr />
         <vueChart ref="map" :options="chartStyle"></vueChart>
     </div>
 </template>
@@ -286,10 +298,15 @@ export default class Home extends Vue {
         //     { name: 'e', count: 3 }
         // ]
         // this.barChartData = barData
-        // getBarChartData().then(resp => {
-        //     const { data } = resp
-        //     this.barChartData = data
-        // })
+
+        // let data = [
+        //     { source: '沙湖', target: '影视基地', value: 983 },
+        //     { source: '沙湖', target: '影视基地', value: 983 },
+        //     { source: '沙湖', target: '影视基地', value: 983 },
+        //     { source: '沙湖', target: '影视基地', value: 983 },
+        //     { source: '沙湖', target: '影视基地', value: 983 }
+        // ]
+        // this.trajectoryData = data
 
         // let data = [{ source: '沙湖', target: '影视基地', value: 983 }]
         // this.trajectoryData = data

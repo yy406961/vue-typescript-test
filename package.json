@@ -46,6 +46,8 @@
     "less": "^3.0.4",
     "less-loader": "^4.1.0",
     "prettier-eslint": "^8.8.2",
+    "sass": "^1.22.0",
+    "sass-loader": "^7.1.0",
     "ts-jest": "^23.0.0",
     "typescript": "^3.4.3",
     "vue-template-compiler": "^2.6.10"
